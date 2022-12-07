@@ -6,6 +6,8 @@ import ProfileComponent from "../Components/ProfileComponent";
 import Screen from "../Components/Screen";
 import Separator from "../Components/Separator";
 import colors from "../config/colors";
+import PageNavigator from "../Navigation/PageNavigator";
+import { API } from "../services/api";
 const menuItems = [
   {
     title: "My Listings",
@@ -18,7 +20,7 @@ const menuItems = [
   },
 ];
 
-function MenuScreen(props) {
+function MenuScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -26,31 +28,61 @@ function MenuScreen(props) {
           image={require("../assets/me.jpg")}
           title="Asad Javed Sulemani"
           subtitle="See your profile"
+          onPress={() => navigation.navigate("MyProfile")}
         />
       </View>
       <ScrollView>
         <View style={styles.container1}>
-          <ListItem title="Pages" iconName="flag" iconColor="purple" />
           <ListItem
-            title="Groups"
+            title="Friend Requests"
+            iconName="flag"
+            iconColor="purple"
+          />
+          <ListItem
+            title="Friends"
             iconName="account-multiple"
             iconColor="purple"
+            onPress={() => navigation.jumpTo("Group", { screen: "Menu" })}
           />
         </View>
         <View style={styles.container1}>
-          <ListItem title="Notifications" iconName="bell" iconColor="purple" />
+          <ListItem
+            title="Notifications"
+            iconName="bell"
+            iconColor="purple"
+            onPress={() => navigation.navigate("Notify")}
+          />
           <ListItem
             title="Messages"
             iconName="facebook-messenger"
             iconColor="purple"
+            onPress={() => navigation.navigate("Messenger")}
           />
         </View>
         <View style={styles.container1}>
-          <ListItem title="Library" iconName="bookshelf" iconColor="purple" />
-          <ListItem title="Settings" iconName="cog" iconColor="purple" />
+          <ListItem
+            title="Library"
+            iconName="bookshelf"
+            iconColor="purple"
+            onPress={() => navigation.navigate("Library")}
+          />
+          <ListItem
+            title="Settings"
+            iconName="cog"
+            iconColor="purple"
+            onPress={() => navigation.navigate("Setting")}
+          />
         </View>
         <View style={styles.btn}>
-          <AppText style={styles.t}>Logout</AppText>
+          <AppText
+            style={styles.t}
+            onPress={() => {
+              API.removeItemValue("token");
+              navigation.navigate("Login");
+            }}
+          >
+            Logout
+          </AppText>
         </View>
       </ScrollView>
     </Screen>
@@ -73,8 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     backgroundColor: colors.white,
-    elevation: 15,
-    shadowOffset: 30,
   },
   t: { padding: 10, fontWeight: "bold", color: colors.purple },
 });

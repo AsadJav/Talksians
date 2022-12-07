@@ -3,6 +3,8 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableHighlight,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
@@ -11,14 +13,18 @@ import Screen from "./Screen";
 import AppText from "./AppText";
 import Icon from "./Icon";
 
-function CreatePost(props) {
+function CreatePost({ onPress, navigation }) {
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/me.jpg")} style={styles.image} />
-      <TouchableWithoutFeedback onPress={() => console.log("Post created")}>
-        <View style={styles.container1}>
-          <AppText style={styles.t1}>What's on your mind?</AppText>
-        </View>
+      <TouchableWithoutFeedback>
+        <Image source={require("../assets/me.jpg")} style={styles.image} />
+      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("ABC")}>
+          <View style={styles.container1}>
+            <AppText style={styles.t1}>What's on your mind?</AppText>
+          </View>
+        </TouchableWithoutFeedback>
       </TouchableWithoutFeedback>
       <TouchableWithoutFeedback onPress={() => console.log("Photo Selected")}>
         <View style={styles.icon}>

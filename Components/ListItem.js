@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Screen from "./Screen";
 import colors from "../config/colors";
 import Icon from "./Icon";
 import AppText from "./AppText";
 
-function ListItem({ title, iconName, iconColor }) {
+function ListItem({ title, iconName, iconColor, onPress }) {
   return (
-    <View style={styles.container}>
-      <Icon name={iconName} iconColor={iconColor} size={60} />
-      <AppText style={styles.text}>{title}</AppText>
-    </View>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
+        <Icon name={iconName} iconColor={iconColor} size={60} />
+        <AppText style={styles.text}>{title}</AppText>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

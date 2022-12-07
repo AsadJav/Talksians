@@ -4,28 +4,86 @@ import AppText from "../Components/AppText";
 import Icon from "../Components/Icon";
 import Screen from "../Components/Screen";
 import colors from "../config/colors";
+import AppForm from "../Components/AppForm";
+import FormImagePicker from "../Components/FormImagePicker";
+import AppFormField from "../Components/AppFormField";
+import SubmitButton from "../Components/SubmitButton";
+import AppFormPicker from "../Components/AppFormPicker";
+import * as Yup from "yup";
+import { API } from "../services/api";
 
-function CreatePostScreen(props) {
+const validationSchema = Yup.object().shape({
+  title: Yup.string().required().label("Title"),
+  description: Yup.string().label("Description"),
+  category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array(),
+});
+
+const categories = [
+  { label: "Public", value: 1 },
+  { label: "Private", value: 2 },
+];
+
+function CreatePostScreen({ navigation }) {
+  const Post = async (postinfo) => {
+    let formdata = { image: postinfo.images, location: "asddas asddd" };
+    let { data, status } = API.post(`/user/upload`, formdata);
+    console.log(data.url);
+    let params = {
+      file: postinfo.file,
+      title: postinfo.title,
+      description: postinfo.description,
+      isPublic: postinfo.isPublic,
+    };
+    let r = await API.post("/post/", params);
+    console.log(r);
+    navigation.navigate("Timeline");
+  };
+
   return (
-    <>
-      <View style={styles.container}>
-        <Image source={require("../assets/me.jpg")} style={styles.image} />
-        <View style={styles.c1}>
-          <AppText style={styles.t1}>Asad Javed Sulemani</AppText>
-        </View>
-        <View style={styles.c2}>
-          <AppText style={styles.t2}>Public</AppText>
-        </View>
-        <Icon name="image-multiple" size={50} iconColor="green" />
-      </View>
-      <TextInput placeholder="Please Say Something..." style={styles.t3} />
-    </>
+    <Screen style={styles.c}>
+      <AppForm
+        initialValues={{
+          title: "",
+          description: "",
+          category: null,
+          images: [],
+        }}
+        validationSchema={validationSchema}
+        onSubmit={Post}
+      >
+        <FormImagePicker name="images" />
+        <AppFormField
+          name="title"
+          placeholder="Post Title (Optional)"
+          maxLength={18}
+        />
+        <AppFormField
+          name="description"
+          placeholder="Captions"
+          multiline
+          numberOfLines={3}
+        />
+        <AppFormPicker
+          items={categories}
+          placeholder="Set Privacy"
+          name="category"
+        />
+
+        <SubmitButton title="Post" style={styles.btn} Fontcolor="white" />
+      </AppForm>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  c: { backgroundColor: "white" },
+  btn: {
+    marginTop: 50,
+    backgroundColor: "purple",
+  },
   container: {
-    marginTop: 20,
+    marginTop: 50,
     flexDirection: "row",
     backgroundColor: "white",
   },
@@ -56,7 +114,6 @@ const styles = StyleSheet.create({
   },
   t2: {
     color: colors.gray,
-    paddingLeft: 5,
     fontSize: 14,
     borderWidth: 2,
     borderColor: colors.light,

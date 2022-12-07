@@ -1,11 +1,25 @@
 import React from "react";
-import { StyleSheet, View, TouchableHighlight, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Image,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
 import AppText from "./AppText";
 import Separator from "./Separator";
 
-function ProfileComponent({ image, title, subtitle, onPress, ImageComponent }) {
+function ProfileComponent({
+  image,
+  title,
+  subtitle,
+  onPress,
+  ImageComponent,
+  navigation,
+}) {
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <>
         <View style={styles.container}>
           {ImageComponent}
@@ -17,7 +31,7 @@ function ProfileComponent({ image, title, subtitle, onPress, ImageComponent }) {
         </View>
         <Separator />
       </>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 

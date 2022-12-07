@@ -1,18 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import AppText from "./AppText";
+import Icon from "./Icon";
 
-function PostHeader(props) {
+function PostHeader({ title, dp, caption }) {
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Image source={require("../assets/me.jpg")} style={styles.image} />
-        <AppText style={styles.title}>Asad Javed Sulemani</AppText>
+        <Image source={{ uri: dp }} style={styles.image} />
+        <AppText style={styles.title}>{title}</AppText>
+        <TouchableWithoutFeedback>
+          <View style={styles.icon}>
+            <Icon name="dots-horizontal" size={50} iconColor="black" />
+          </View>
+        </TouchableWithoutFeedback>
       </View>
-      <AppText style={styles.description}>
-        "There is no one who loves pain itself, who seeks after it and wants to
-        have it, simply because it is pain..."
-      </AppText>
+      <AppText style={styles.description}>{caption}</AppText>
     </View>
   );
 }
@@ -39,6 +47,10 @@ const styles = StyleSheet.create({
     margin: 5,
     color: "black",
     fontSize: 16,
+  },
+  icon: {
+    position: "absolute",
+    right: 10,
   },
 });
 

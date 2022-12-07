@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import colors from "../config/colors";
 import AppText from "./AppText";
 import Icon from "./Icon";
@@ -14,81 +14,91 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import MenuScreen from "../Screens/MenuScreen";
 import TalksiansComponent from "./TalksiansComponent";
+import MenuNavigator from "../Navigation/MenuNavigator";
+import FeedNavigator from "../Navigation/FeedNavigator";
+import PageNavigator from "../Navigation/PageNavigator";
+import GroupNavigator from "../Navigation/GroupNavigator";
 
 const Tab = createMaterialTopTabNavigator();
 
-function AppNavbar(props) {
+function AppNavbar({ navigation }) {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        options={{
-          title: ({ focused }) => (
-            <Ionicons
-              name={focused ? "home" : "home-outline"}
-              size={25}
-              color={focused ? "purple" : "272727"}
-            />
-          ),
+    <>
+      <TalksiansComponent />
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: { backgroundColor: "white" },
         }}
-        component={TimelineScreen}
-        name="Home"
-      />
-      <Tab.Screen
-        options={{
-          title: ({ focused }) => (
-            <MaterialCommunityIcons
-              name={focused ? "flag" : "flag-outline"}
-              size={25}
-              color={focused ? "purple" : "272727"}
-            />
-          ),
-        }}
-        component={PagesScreen}
-        name="Pages"
-      />
-      <Tab.Screen
-        options={{
-          title: ({ focused }) => (
-            <Ionicons
-              name={focused ? "people" : "people-outline"}
-              size={25}
-              color={focused ? "purple" : "272727"}
-            />
-          ),
-        }}
-        component={GroupScreen}
-        name="Groups"
-      />
-      <Tab.Screen
-        options={{
-          title: ({ focused }) => (
-            <Ionicons
-              name={focused ? "notifications" : "notifications-outline"}
-              size={25}
-              color={focused ? "purple" : "272727"}
-            />
-          ),
-        }}
-        component={NotificationScreen}
-        name="Notifications"
-      />
-      <Tab.Screen
-        options={{
-          title: ({ focused }) => (
-            <Ionicons
-              name={focused ? "menu" : "menu"}
-              size={30}
-              color={focused ? "purple" : "272727"}
-            />
-          ),
-        }}
-        component={MenuScreen}
-        name="Menu"
-      />
-    </Tab.Navigator>
+      >
+        <Tab.Screen
+          options={{
+            title: ({ focused }) => (
+              <Ionicons
+                name={focused ? "home" : "home-outline"}
+                size={25}
+                color={focused ? "purple" : "272727"}
+              />
+            ),
+          }}
+          component={FeedNavigator}
+          name="H"
+        />
+        <Tab.Screen
+          options={{
+            title: ({ focused }) => (
+              <MaterialCommunityIcons
+                name={focused ? "flag" : "flag-outline"}
+                size={25}
+                color={focused ? "purple" : "272727"}
+              />
+            ),
+          }}
+          component={PageNavigator}
+          name="Pages"
+        />
+        <Tab.Screen
+          options={{
+            title: ({ focused }) => (
+              <Ionicons
+                name={focused ? "people" : "people-outline"}
+                size={25}
+                color={focused ? "purple" : "272727"}
+              />
+            ),
+          }}
+          component={GroupNavigator}
+          name="Groups"
+        />
+        <Tab.Screen
+          options={{
+            title: ({ focused }) => (
+              <Ionicons
+                name={focused ? "notifications" : "notifications-outline"}
+                size={25}
+                color={focused ? "purple" : "272727"}
+              />
+            ),
+          }}
+          component={NotificationScreen}
+          name="Notifications"
+        />
+        <Tab.Screen
+          options={{
+            title: ({ focused }) => (
+              <Ionicons
+                name={focused ? "menu" : "menu"}
+                size={30}
+                color={focused ? "purple" : "272727"}
+              />
+            ),
+          }}
+          component={MenuNavigator}
+          name="M"
+        />
+      </Tab.Navigator>
+    </>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",

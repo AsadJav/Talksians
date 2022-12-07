@@ -4,26 +4,32 @@ import AppText from "./AppText";
 import Icon from "./Icon";
 import Separator from "./Separator";
 
-function ProfileTitleComponent(props) {
+function ProfileTitleComponent({ title, btn, iconName, options }) {
   return (
     <View style={styles.container}>
-      <AppText style={styles.title}>Asad Javed Sulemani</AppText>
+      <AppText style={styles.title}>{title}</AppText>
 
       <View style={styles.btnView}>
-        <TouchableOpacity>
-          <AppText style={styles.editButton}>Edit Your Profile</AppText>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="cog" iconColor="purple" size={60} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon
-            name="dots-horizontal"
-            iconColor="purple"
-            size={60}
-            style={styles.iconView}
-          />
-        </TouchableOpacity>
+        {btn && (
+          <TouchableOpacity>
+            <AppText style={styles.editButton}>{btn}</AppText>
+          </TouchableOpacity>
+        )}
+        {iconName && (
+          <TouchableOpacity>
+            <Icon name={iconName} iconColor="purple" size={60} />
+          </TouchableOpacity>
+        )}
+        {options && (
+          <TouchableOpacity>
+            <Icon
+              name={options}
+              iconColor="purple"
+              size={60}
+              style={styles.iconView}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       <Separator />
     </View>
@@ -34,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 26,

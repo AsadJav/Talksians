@@ -4,7 +4,7 @@ import colors from "../config/colors";
 import AppText from "./AppText";
 import Screen from "./Screen";
 import Icon from "./Icon";
-import TimelineScreen from "../Screens/TimelineScreen";
+import MessengerScreen from "../Screens/MessengerScreen";
 
 function TalksiansComponent(props) {
   return (
@@ -12,7 +12,12 @@ function TalksiansComponent(props) {
       <View style={styles.container1}>
         <AppText style={styles.text}>Talksians</AppText>
         <View style={styles.icon}>
-          <Icon name="facebook-messenger" size={50} iconColor="black" />
+          <Icon
+            name="facebook-messenger"
+            size={50}
+            iconColor="black"
+            onPress={MessengerScreen}
+          />
         </View>
       </View>
     </View>

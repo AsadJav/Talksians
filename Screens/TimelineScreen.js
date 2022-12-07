@@ -1,21 +1,45 @@
-import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+} from "react-native";
+import { API } from "../services/api";
 import AppText from "../Components/AppText";
 import CreatePost from "../Components/CreatePost";
 import Post from "../Components/Post";
-import TalksiansComponent from "../Components/TalksiansComponent";
 import colors from "../config/colors";
 
-function TimelineScreen(props) {
+function TimelineScreen({ navigation }) {
+  const [posts, setposts] = useState([]);
+  useEffect(() => {
+    const get_posts = async () => {
+      let r = await API.get("/post/");
+      if (r.error) {
+        setposts([]);
+      } else {
+        setposts(r.post.reverse());
+      }
+    };
+    get_posts();
+  }, []);
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <CreatePost />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </ScrollView>
+      <FlatList
+        data={posts}
+        keyExtractor={(posts) => posts._id}
+        ListHeaderComponent={<CreatePost navigation={navigation} />}
+        renderItem={({ item }) => (
+          <Post
+            title={item.user}
+            caption={item.description}
+            img={item.file}
+            navigation={navigation}
+          />
+        )}
+      />
     </View>
   );
 }
@@ -23,7 +47,6 @@ function TimelineScreen(props) {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: colors.gray,
   },
 });

@@ -5,7 +5,7 @@ import AppText from "./AppText";
 import ProfileTitleComponent from "./ProfileTitleComponent";
 import Screen from "./Screen";
 
-function MyProfie(props) {
+function MyProfie({ navigation, title, btn, iconName, options, style }) {
   return (
     <>
       <View style={styles.container}>
@@ -17,13 +17,18 @@ function MyProfie(props) {
           />
         </View>
       </View>
-      <ProfileTitleComponent />
+      <ProfileTitleComponent
+        title={title}
+        btn={btn}
+        iconName={iconName}
+        options={options}
+      />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { height: 350 },
+  container: { height: 350, backgroundColor: "white" },
   image: {
     width: "100%",
     height: "80%",

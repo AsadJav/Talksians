@@ -7,13 +7,22 @@ import AppText from "../Components/AppText";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import SubmitButton from "../Components/SubmitButton";
+import { API } from "../services/api";
 
 const validationSchema = Yup.object().shape({
   regno: Yup.string().required().min(11).max(12).label("Registertaion Number"),
   email: Yup.string().required().email().label("Email"),
 });
 
-function ForgetPasswordScreen(props) {
+function ForgetPasswordScreen({ navigation }) {
+  const FP = async (info) => {
+    let params = {
+      email: info.email,
+    };
+    let r = await API.post("/user/recover-account", params);
+    console.log(r);
+    navigation.navigate("Login");
+  };
   return (
     <Screen style={styles.container}>
       <AppText
@@ -33,7 +42,7 @@ function ForgetPasswordScreen(props) {
           email: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={FP}
       >
         <AppFormField
           autoCapitalize="none"
@@ -53,7 +62,7 @@ function ForgetPasswordScreen(props) {
           placeholder="Email"
         />
 
-        <SubmitButton title="Forget Password" />
+        <SubmitButton title="Forgot" />
       </AppForm>
     </Screen>
   );

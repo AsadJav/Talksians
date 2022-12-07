@@ -8,6 +8,7 @@ import AppText from "../Components/AppText";
 import Screen from "../Components/Screen";
 import SubmitButton from "../Components/SubmitButton";
 import colors from "../config/colors";
+import { API } from "../services/api";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().min(1).label("First Name"),
@@ -17,7 +18,20 @@ const validationSchema = Yup.object().shape({
   regno: Yup.string().required().min(11).max(12).label("Registertaion Number"),
 });
 
-function RegisterScreen(props) {
+function RegisterScreen({ navigation }) {
+  const Verify = async (signUpInfo) => {
+    let params = {
+      firstname: signUpInfo.firstname,
+      lastname: signUpInfo.lastname,
+      email: signUpInfo.email,
+      regno: signUpInfo.regno,
+      password: signUpInfo.password,
+    };
+    let r = await API.post("/user/signup", params);
+    API.setItem("user", r);
+    console.log(r);
+    navigation.navigate("OTP");
+  };
   return (
     <Screen style={styles.container}>
       <AppText
@@ -40,7 +54,8 @@ function RegisterScreen(props) {
           password: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        //onSubmit={(values) => console.log(values)}
+        onSubmit={Verify}
       >
         <AppFormField
           autoCapitalize="none"
@@ -82,7 +97,10 @@ function RegisterScreen(props) {
           placeholder="Password"
           name="password"
         />
-        <SubmitButton title="SignUp" />
+        <SubmitButton
+          title="Verify"
+          //onPress={() => navigation.navigate("Login")}
+        />
       </AppForm>
     </Screen>
   );

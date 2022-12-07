@@ -7,12 +7,22 @@ import AppText from "../Components/AppText";
 import AppForm from "../Components/AppForm";
 import AppFormField from "../Components/AppFormField";
 import SubmitButton from "../Components/SubmitButton";
+import { API } from "../services/api";
 
 const validationSchema = Yup.object().shape({
-  otp: Yup.number(255).required().min(4).max(5).label("OTP"),
+  otp: Yup.number(255).required().min(1).label("OTP"),
 });
 
-function OTPScreen(props) {
+function OTPScreen({ navigation }) {
+  const Submit = async (verification) => {
+    let params = {
+      otp: verification.otp,
+    };
+    let r = await API.post("/user/verify", params);
+    API.setItem("user", r);
+    console.log(r);
+    navigation.navigate("Login");
+  };
   return (
     <Screen style={styles.container}>
       <AppText
@@ -24,12 +34,13 @@ function OTPScreen(props) {
           marginTop: 20,
         }}
       >
-        Verification of your OTP
+        Verifiy of your OTP
       </AppText>
       <AppForm
         initialValues={{ otp: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={Submit}
+        //onSubmit={() => navigation.navigate("Login")}
       >
         <AppFormField
           autoCapitalize="none"
