@@ -8,7 +8,7 @@ import PostHeader from "./PostHeader";
 import Separator from "./Separator";
 import { API } from "../services/api";
 
-function Post({ title, caption, dp, img, navigation }) {
+function Post({ title, caption, dp, img, navigation, likeNo, commentNo }) {
   if (img === undefined || typeof img == "number") {
     return <View></View>;
   } else {
@@ -38,7 +38,11 @@ function Post({ title, caption, dp, img, navigation }) {
           <Image source={{ uri: img }} style={styles.postpic} />
         </View>
         <View style={styles.buttons}>
-          <PostButton navigation={navigation} />
+          <PostButton
+            navigation={navigation}
+            likeNo={likeNo}
+            commentNo={commentNo}
+          />
           <Separator />
         </View>
       </View>

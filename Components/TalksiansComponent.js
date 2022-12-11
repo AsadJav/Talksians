@@ -26,8 +26,9 @@ function TalksiansComponent(props) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    marginBottom: 10,
+    paddingTop: 40,
+    paddingBottom: 10,
+    backgroundColor: "white",
   },
   container1: {
     flexDirection: "row",

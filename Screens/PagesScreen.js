@@ -29,6 +29,8 @@ function PagesScreen({ navigation }) {
           title={item.user}
           caption={item.description}
           img={item.file}
+          likeNo={item.numberOfLike}
+          commentNo={item.noComment}
         />
       )}
     />

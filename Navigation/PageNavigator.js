@@ -6,6 +6,7 @@ import CreatePage from "../Screens/CreatePage";
 import CreatePostScreen from "../Screens/CreatePostScreen";
 import PagesScreen from "../Screens/PagesScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import YourPagesScreen from "../Screens/YourPagesScreen";
 const Stack = createNativeStackNavigator();
 
 const PageNavigator = () => (
@@ -14,6 +15,7 @@ const PageNavigator = () => (
     <Stack.Screen name="CreatePage" component={CreatePage} />
     <Stack.Screen name="CreatePost" component={CreatePostScreen} />
     <Stack.Screen name="Comment" component={CommentScreen} />
+    <Stack.Screen name="YourPages" component={YourPagesScreen} />
   </Stack.Navigator>
 );
 

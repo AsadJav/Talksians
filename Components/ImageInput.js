@@ -33,7 +33,7 @@ function ImageInput({ imageUri, onChangeImage }) {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
       });
-      if (!image.canceled) onChangeImage(image.uri);
+      if (!image.cancelled) onChangeImage(image.uri);
     } catch (error) {
       console.log(error);
     }

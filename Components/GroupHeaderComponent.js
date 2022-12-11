@@ -28,14 +28,16 @@ function GroupHeaderComponent({ navigation }) {
 
       <View style={styles.SecondView}>
         <ScrollView horizontal={true}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate("AllGroups")}
+          >
             <View style={styles.btn}>
               <AppText style={styles.AppText2}>Your Group</AppText>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>
             <View style={styles.btn}>
-              <AppText style={styles.AppText2}> Joined Groups</AppText>
+              <AppText style={styles.AppText2}>My Groups</AppText>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>

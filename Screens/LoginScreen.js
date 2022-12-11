@@ -27,6 +27,7 @@ function LoginScreen({ navigation }) {
     } else {
       API.setItem("user", r.User);
       API.setItem("token", r.token);
+      console.log(r.User + "..... " + r.token);
 
       navigation.navigate("Feed");
     }

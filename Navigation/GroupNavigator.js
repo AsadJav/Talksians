@@ -5,6 +5,7 @@ import CreatePostScreen from "../Screens/CreatePostScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GroupScreen from "../Screens/GroupScreen";
 import CreateGroup from "../Screens/CreateGroup";
+import AllGroupsScreen from "../Screens/AllGroupsScreen";
 const Stack = createNativeStackNavigator();
 
 const GroupNavigator = () => (
@@ -13,6 +14,7 @@ const GroupNavigator = () => (
     <Stack.Screen name="CreateGroup" component={CreateGroup} />
     <Stack.Screen name="CreatePost" component={CreatePostScreen} />
     <Stack.Screen name="Comment" component={CommentScreen} />
+    <Stack.Screen name="AllGroups" component={AllGroupsScreen} />
   </Stack.Navigator>
 );
 

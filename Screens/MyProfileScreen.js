@@ -5,17 +5,34 @@ import Post from "../Components/Post";
 import { API } from "../services/api";
 
 function MyProfileScreen({ navigation }) {
-  const [posts, setposts] = useState([]);
+  const [user, setUser] = useState("");
+  const [posts, setAllPosts] = useState([]);
+
   useEffect(() => {
-    const get_posts = async () => {
-      let r = await API.get("/post");
+    const get_Details = async () => {
+      let r = await API.get("/user/profile");
       if (r.error) {
-        setposts([]);
+        setUser("");
       } else {
-        setposts(r.post);
+        setUser(r);
+        console.log(r);
       }
     };
-    get_posts();
+    get_Details();
+  }, []);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      let r = await API.get("/post/user");
+
+      if (r.error) {
+        setAllPosts([]);
+      } else {
+        setAllPosts(r.posts);
+      }
+      console.log(r);
+    };
+    getPosts();
   }, []);
 
   return (
@@ -25,7 +42,8 @@ function MyProfileScreen({ navigation }) {
         keyExtractor={(posts) => posts._id}
         ListHeaderComponent={
           <MyProfie
-            title="Asad Javed Sulemani"
+            title={user.firstName + " " + user.lastName}
+            profileImg={user.profileImage}
             btn="Edit Your Profile"
             iconName="cog"
             options="plus-circle"
@@ -37,6 +55,8 @@ function MyProfileScreen({ navigation }) {
             title={item.user}
             caption={item.description}
             img={item.file}
+            likeNo={item.numberOfLike}
+            commentNo={item.noComment}
           />
         )}
       />

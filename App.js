@@ -29,11 +29,17 @@ import ImageInput from "./Components/ImageInput";
 import UserPage from "./Screens/UserPage";
 import PageComponent from "./Components/PageComponent";
 import MyProfileScreen from "./Screens/MyProfileScreen";
+import UserScreen from "./Screens/UserScreen";
+import GroupComponent from "./Components/GroupComponent";
+import AllGroupsScreen from "./Screens/AllGroupsScreen";
+import YourPagesScreen from "./Screens/YourPagesScreen";
 
 export default function App() {
   return (
+    // <YourPagesScreen />
+    // <AllGroupsScreen />
+    // <GroupComponent />
     // <WelcomeScreen />
-
     <NavigationContainer>
       <AuthNavigator />
     </NavigationContainer>

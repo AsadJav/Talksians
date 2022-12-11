@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import AppText from "../Components/AppText";
 import ListItem from "../Components/ListItem";
@@ -8,25 +8,28 @@ import Separator from "../Components/Separator";
 import colors from "../config/colors";
 import PageNavigator from "../Navigation/PageNavigator";
 import { API } from "../services/api";
-const menuItems = [
-  {
-    title: "My Listings",
-    icon: { name: "format-list-bulleted", backgroundColor: colors.primary },
-  },
-  {
-    title: "My Messages",
-    icon: { name: "email", backgroundColor: colors.sec },
-    targetScreen: "Messages",
-  },
-];
 
-function MenuScreen({ navigation }) {
+function MenuScreen({ navigation, img, title }) {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const get_posts = async () => {
+      let r = await API.get("/user/profile");
+      if (r.error) {
+        setUser("");
+      } else {
+        setUser(r);
+        console.log(r);
+      }
+    };
+
+    get_posts();
+  }, []);
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ProfileComponent
-          image={require("../assets/me.jpg")}
-          title="Asad Javed Sulemani"
+          image={{ uri: user.profileImage }}
+          title={user.firstName + " " + user.lastName}
           subtitle="See your profile"
           onPress={() => navigation.navigate("MyProfile")}
         />

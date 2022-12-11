@@ -36,6 +36,8 @@ function TimelineScreen({ navigation }) {
             title={item.user}
             caption={item.description}
             img={item.file}
+            likeNo={item.numberOfLike}
+            commentNo={item.noComment}
             navigation={navigation}
           />
         )}

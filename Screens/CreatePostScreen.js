@@ -11,6 +11,7 @@ import SubmitButton from "../Components/SubmitButton";
 import AppFormPicker from "../Components/AppFormPicker";
 import * as Yup from "yup";
 import { API } from "../services/api";
+import ImgPicker from "../Components/ImgPicker";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().label("Title"),
@@ -52,7 +53,7 @@ function CreatePostScreen({ navigation }) {
         validationSchema={validationSchema}
         onSubmit={Post}
       >
-        <FormImagePicker name="images" />
+        <ImgPicker />
         <AppFormField
           name="title"
           placeholder="Post Title (Optional)"
@@ -64,11 +65,6 @@ function CreatePostScreen({ navigation }) {
           multiline
           numberOfLines={3}
         />
-        <AppFormPicker
-          items={categories}
-          placeholder="Set Privacy"
-          name="category"
-        />
 
         <SubmitButton title="Post" style={styles.btn} Fontcolor="white" />
       </AppForm>
@@ -77,13 +73,13 @@ function CreatePostScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  c: { backgroundColor: "white" },
+  c: { backgroundColor: "white", height: "100%" },
   btn: {
-    marginTop: 50,
+    marginTop: 100,
     backgroundColor: "purple",
   },
   container: {
-    marginTop: 50,
+    marginTop: 70,
     flexDirection: "row",
     backgroundColor: "white",
   },

@@ -5,16 +5,22 @@ import AppText from "./AppText";
 import ProfileTitleComponent from "./ProfileTitleComponent";
 import Screen from "./Screen";
 
-function MyProfie({ navigation, title, btn, iconName, options, style }) {
+function MyProfie({
+  navigation,
+  title,
+  btn,
+  iconName,
+  options,
+  style,
+  Coverimg,
+  profileImg,
+}) {
   return (
     <>
       <View style={styles.container}>
         <Image source={require("../assets/couch.jpg")} style={styles.image} />
         <View style={styles.profileV}>
-          <Image
-            source={require("../assets/me.jpg")}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: profileImg }} style={styles.profileImage} />
         </View>
       </View>
       <ProfileTitleComponent

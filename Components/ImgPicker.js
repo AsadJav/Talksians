@@ -25,12 +25,12 @@ function ImgPicker(props) {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 0.5,
       });
-      if (!image.canceled) setImageUri(image.uri);
+      if (!image.cancelled) setImageUri(image.uri);
     } catch (error) {
       console.log(error);
     }
   };
-
+  console.log(imageUri);
   const handlePress = () => {
     if (!imageUri) selectImage();
     else
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
+    marginBottom: 20,
   },
   image: {
     width: "100%",

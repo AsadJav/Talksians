@@ -28,7 +28,9 @@ function PageHeaderComponent({ navigation }) {
 
       <View style={styles.SecondView}>
         <ScrollView horizontal={true}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate("YourPages")}
+          >
             <View style={styles.btn}>
               <AppText style={styles.AppText2}>Your Pages</AppText>
             </View>

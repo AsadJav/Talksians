@@ -1,20 +1,29 @@
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, View, Pressable } from "react-native";
 import App from "../App";
 import AppButton from "./AppButton";
 import AppText from "./AppText";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
 function PageComponent({ title, desc, logo }) {
+  const [liked, setLiked] = useState(false);
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/COMSATS_new_logo.jpg")}
-        style={styles.img}
-      />
+      <Image source={logo} style={styles.img} />
       <View style={styles.View}>
-        <AppText style={styles.title}> GOOGLE</AppText>
-        <AppText style={styles.desc}>University & College</AppText>
-        <AppButton title="Like Page" style={styles.btn} fcolor="white" />
+        <View>
+          <AppText style={styles.title}> {title}</AppText>
+          <AppText style={styles.desc}>{desc}</AppText>
+        </View>
+        <View style={{ marginLeft: 70 }}>
+          <Pressable onPress={() => setLiked((isLiked) => !isLiked)}>
+            <MaterialCommunityIcons
+              name={liked ? "thumb-up" : "thumb-up-outline"}
+              size={40}
+              color={liked ? "purple" : "black"}
+            />
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -22,24 +31,31 @@ function PageComponent({ title, desc, logo }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80,
+    marginTop: 20,
     flexDirection: "row",
     alignItems: "center",
+    borderBottomWidth: 1,
+    paddingBottom: 5,
+    marginBottom: 5,
+    backgroundColor: "white",
   },
   img: {
     marginRight: 10,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    marginTop: 5,
   },
   View: {
-    marginTop: 40,
+    marginTop: 5,
+    flexDirection: "row",
   },
   title: {
     fontWeight: "bold",
   },
-  dese: {
-    fontSize: 1,
+  desc: {
+    fontSize: 14,
+    marginLeft: 5,
   },
   btn: { backgroundColor: "purple", marginTop: 10 },
 });
